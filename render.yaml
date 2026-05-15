@@ -36,13 +36,13 @@ services:
       - key: TAB_DIRECTOR_EMAIL
         sync: false
       - key: TIME_ZONE
-        sync: false
+        value: "Asia/Dhaka"
       - key: ON_RENDER
         value: true
       - key: USING_NGINX
-        value: 0 # Not 'false'; is cast
-  
-- type: worker
+        value: 0
+
+  - type: worker
     name: tabbycat_worker
     env: python
     plan: free
@@ -70,10 +70,11 @@ services:
         value: "3.12.3"
       - key: ON_RENDER
         value: true
+
   - type: redis
     name: tabbycat_redis
-    ipAllowList: # required
+    ipAllowList:
       - source: 0.0.0.0
         description: everywhere
     plan: free
-    maxmemoryPolicy: allkeys-lru # (default)
+    maxmemoryPolicy: allkeys-lru
